@@ -2,7 +2,7 @@
 
 // API publicada en Vercel. La usa la app de Android, que no está en el servidor;
 // también se puede cambiar desde "Servidor" en la pantalla de ingreso.
-const API_REMOTA = 'https://gastosdelmes-api.vercel.app/api';
+const API_REMOTA = 'https://my-proyect-jade.vercel.app/api';
 const esApp = Boolean(window.Capacitor?.isNativePlatform?.());
 
 // localStorage puede no estar disponible (modo privado); nunca debe romper la app
