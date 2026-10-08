@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gastos del mes</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐶</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="logged-out">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1>Gastos del mes</h1>
+      <nav class="month-nav" aria-label="Cambiar de mes">
+        <button type="button" id="prev" class="icon-btn" aria-label="Mes anterior">‹</button>
+        <span id="month-label" class="month-label"></span>
+        <button type="button" id="next" class="icon-btn" aria-label="Mes siguiente">›</button>
+      </nav>
+      <span id="sync" class="sync" role="status"></span>
+      <div id="user-box" class="user-box"></div>
+    </div>
+  </header>
+
+  <main id="app" class="container"></main>
+
+  <script src="app.js"></script>
+</body>
+</html>

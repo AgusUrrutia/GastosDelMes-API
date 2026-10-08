@@ -1,0 +1,21 @@
+{
+  "name": "gastos-del-mes-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API de Gastos del mes en Node + MongoDB, para Vercel",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "copiar-web": "node scripts/copiar-web.js",
+    "dev": "node scripts/copiar-web.js && node --env-file=.env dev.js",
+    "migrar": "node --env-file=.env scripts/migrar-desde-mysql.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "mongodb": "^6.12.0"
+  },
+  "devDependencies": {
+    "mysql2": "^3.11.5"
+  }
+}
