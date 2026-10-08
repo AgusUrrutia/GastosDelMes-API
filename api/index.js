@@ -421,6 +421,15 @@ const acciones = {
 
 // ---------- Entrada HTTP ----------
 
+// Explica por qué falló la conexión a MongoDB, sin mostrar datos sensibles
+function errorDeConexion(e) {
+  if (!process.env.MONGODB_URI) return 'Base de datos no configurada: falta la variable MONGODB_URI';
+  if (e.name === 'MongoServerSelectionError') return 'No se pudo llegar a MongoDB: revisar Network Access en Atlas (0.0.0.0/0)';
+  if (e.code === 18 || e.code === 8000 || /auth/i.test(e.message)) return 'MongoDB rechazó el usuario o la contraseña de MONGODB_URI';
+  if (e.name === 'MongoParseError' || /Invalid scheme|URI/i.test(e.message)) return 'MONGODB_URI tiene un formato inválido';
+  return 'No se pudo conectar con la base de datos';
+}
+
 function leerBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;
   if (typeof req.body === 'string' && req.body) {
@@ -447,8 +456,15 @@ module.exports = async function handler(req, res) {
   const accion = String(query.action || '');
   const body = leerBody(req);
 
+  let db;
   try {
-    const db = await getDb();
+    db = await getDb();
+  } catch (e) {
+    console.error(e);
+    return responder(500, { error: errorDeConexion(e) });
+  }
+
+  try {
     if (accion === 'login') return responder(200, await login(db, req, body));
     const yo = await usuarioActual(db, req);
     const fn = Object.prototype.hasOwnProperty.call(acciones, accion) ? acciones[accion] : null;
